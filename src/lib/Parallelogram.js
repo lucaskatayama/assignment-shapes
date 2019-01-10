@@ -1,55 +1,62 @@
+import Geometry from "./Geometry.js";
+
 class Parallelogram {
   constructor(pointA, pointB, pointC) {
-    this.pA = pointA;
-    this.pB = pointB;
-    this.pC = pointC;
+    this.pointA = pointA;
+    this.pointB = pointB;
+    this.pointC = pointC;
   }
 
   /**
-   2 triangles together
-   Determinant * 2
+   * Calculates area by calculating a matrix determinant of a triangle
+   *
+   * @returns Area in pixels
+   * @memberof pointArallelogram
    */
-  get area() {
+  getArea() {
     return Math.abs(
-      this.pA.x * this.pB.y +
-        this.pA.y * this.pC.x +
-        this.pB.x * this.pC.y -
-        this.pC.x * this.pB.y -
-        this.pC.y * this.pA.x -
-        this.pB.x * this.pA.y
+      this.pointA.x * this.pointB.y +
+        this.pointA.y * this.pointC.x +
+        this.pointB.x * this.pointC.y -
+        this.pointC.x * this.pointB.y -
+        this.pointC.y * this.pointA.x -
+        this.pointB.x * this.pointA.y
     );
   }
 
-  get deltaBA() {
+  /**
+   * Get last point D by decomposing the edges
+   *
+   * @returns point D {x: Number, y: Number}
+   * @memberof pointArallelogram
+   */
+  getPointD() {
+    const deltaBA = Geometry.delta(this.pointB, this.pointA);
+    const deltaBC = Geometry.delta(this.pointB, this.pointC);
+
     return {
-      x: this.pA.x - this.pB.x,
-      y: this.pA.y - this.pB.y
+      x: this.pointB.x + deltaBA.x + deltaBC.x,
+      y: this.pointB.y + deltaBA.y + deltaBC.y
     };
   }
 
-  get deltaBC() {
-    return {
-      x: this.pC.x - this.pB.x,
-      y: this.pC.y - this.pB.y
-    };
-  }
+  /**
+   * Get center of mass.
+   * @returns
+   * @memberof Geometry
+   */
+  getCenterOfMass() {
+    const deltaBA = Geometry.delta(this.pointB, this.pointA);
+    const deltaBC = Geometry.delta(this.pointB, this.pointC);
 
-  get pD() {
     return {
-      x: this.pB.x + this.deltaBA.x + this.deltaBC.x,
-      y: this.pB.y + this.deltaBA.y + this.deltaBC.y
-    };
-  }
-
-  get CM() {
-    return {
-      x: this.pB.x + (this.deltaBA.x + this.deltaBC.x) / 2,
-      y: this.pB.y + (this.deltaBA.y + this.deltaBC.y) / 2
+      x: this.pointB.x + (deltaBA.x + deltaBC.x) / 2,
+      y: this.pointB.y + (deltaBA.y + deltaBC.y) / 2
     };
   }
 
   get points() {
-    return [this.pA, this.pB, this.pC, this.pD];
+    return [this.pointA, this.pointB, this.pointC, this.getPointD()];
   }
 }
 

@@ -9,25 +9,31 @@
       </div>
       <div>
         <h3>Parallelogram</h3>
-        <ul>
+        <p v-if="parallelogram === null">
+          No paralellogram
+        </p>
+        <ul v-else>
           <li v-if="points.length > 0">Points
             <ul>
               <li :key="idx" v-for="(point, idx) in points">({{point.x}}, {{point.y}})</li>
-              <li v-if="p">({{p.pD.x}}, {{p.pD.y}})</li>
+              <li v-if="parallelogram">({{pointD.x}}, {{pointD.y}})</li>
             </ul>
           </li>
-          <template v-if="p">
-            <li>Center of Mass: ({{p.CM.x}}, {{p.CM.y}})</li>
-            <li>Area: {{p.area}}</li>
+          <template v-if="parallelogram">
+            <li>Center of Mass: ({{centerOfMass.x}}, {{centerOfMass.y}})</li>
+            <li>Area: {{parallelogram.getArea()}} px<sup>2</sup></li>
           </template>
 
         </ul>
 
         <h3>Circle</h3>
-        <ul v-if="p">
-          <li>Center of Mass: ({{p.CM.x}}, {{p.CM.y}})</li>
-          <li>Area: {{p.area}}</li>
-          <li>Radius: {{radius}}px</li>
+        <p v-if="circle === null">
+          No circle
+        </p>
+        <ul v-else>
+          <li>Center of Mass: ({{circle.center.x}}, {{circle.center.x}})</li>
+          <li>Area: {{circle.area}} px<sup>2</sup></li>
+          <li>Radius: {{circle.getRadius()}} px</li>
         </ul>
       </div>
     </nav>
@@ -41,10 +47,10 @@
 
       <div class="home">
         <svg class="canvas" ref="canvas">
-          <parallelogram-shape :parallelogram="p" v-if="points.length === 3"></parallelogram-shape>
-          <circle-shape :center="centerOfMass" :radius="radius" color="#FFD438" v-if="points.length === 3"></circle-shape>
-          <point :point="mouse" color="#FF0000"></point>
-          <point draggable :key="idx" :point="point" color="#FF0000" v-for="(point, idx) in points"></point>
+          <parallelogram-shape :parallelogram="parallelogram" v-if="points.length === 3"></parallelogram-shape>
+          <circle-shape :center="circle.center" :radius="circle.getRadius()" color="#FFD438" v-if="points.length === 3"></circle-shape>
+          <point-shape :point="mouse" color="#FF0000"></point-shape>
+          <point-shape draggable :key="idx" :point="point" color="#FF0000" v-for="(point, idx) in points"></point-shape>
         </svg>
       </div>
     </main>
@@ -56,14 +62,16 @@
 import ParallelogramShape from "@/components/ParallelogramShape.vue";
 import CircleShape from "@/components/CircleShape.vue";
 import Parallelogram from "@/lib/Parallelogram.js";
-import Point from "@/components/Point.vue";
+import Geometry from "@/lib/Geometry.js";
+import Circle from "@/lib/Circle.js";
+import PointShape from "@/components/PointShape.vue";
 
 export default {
-  name: "home",
+  name: "Canvas",
   components: {
     ParallelogramShape,
     CircleShape,
-    Point
+    PointShape
   },
   data() {
     return {
@@ -72,16 +80,20 @@ export default {
         y: 0
       },
       points: [],
-      p: null,
+      parallelogram: null,
+      circle: null,
       selectedPoint: null
     };
   },
   computed: {
-    radius() {
-      return Math.sqrt(this.p.area / Math.PI);
+    pointD() {
+      return this.parallelogram.getPointD();
     },
     centerOfMass() {
-      return this.p.CM;
+      return this.parallelogram.getCenterOfMass();
+    },
+    area() {
+      return this.parallelogram.getArea();
     }
   },
   methods: {
@@ -94,26 +106,33 @@ export default {
     },
     reset() {
       this.points = [];
+      this.parallelogram = null;
+      this.circle = null;
+    },
+    updateShapes() {
+      this.circle.setCenter(this.centerOfMass);
+      this.circle.setArea(this.area);
+    },
+    createShapes() {
+      this.parallelogram = new Parallelogram(
+        this.points[0],
+        this.points[1],
+        this.points[2]
+      );
+      this.circle = new Circle(this.centerOfMass, this.area);
     },
     addParallelogramPoint(point) {
       if (this.points.length < 3) {
         this.points.push(point);
       }
       if (this.points.length === 3) {
-        this.p = new Parallelogram(
-          this.points[0],
-          this.points[1],
-          this.points[2]
-        );
+        this.createShapes();
       }
-    },
-    distance(a, b) {
-      return Math.sqrt(Math.abs((a.x - b.x) ** 2 + (a.y - b.y) ** 2));
     },
     click(evt) {
       let mouse = this.getMousePos(this.canvas, evt);
       const point = this.points.find(p => {
-        return this.distance(p, mouse) <= 5.5;
+        return Geometry.distance(p, mouse) <= 5.5;
       });
       if (!point) {
         this.addParallelogramPoint(mouse);
@@ -122,7 +141,7 @@ export default {
     startDrag(evt) {
       let mouse = this.getMousePos(this.canvas, evt);
       const point = this.points.find(p => {
-        return this.distance(p, mouse) <= 5.5;
+        return Geometry.distance(p, mouse) <= 5.5;
       });
       if (point) {
         this.selectedPoint = point;
@@ -134,6 +153,7 @@ export default {
         let mouse = this.getMousePos(this.canvas, evt);
         this.selectedPoint.x = mouse.x;
         this.selectedPoint.y = mouse.y;
+        this.updateShapes();
       }
     },
     endDrag() {
