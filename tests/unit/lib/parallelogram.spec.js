@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Parallelogram from "@/lib/parallelogram.js";
+import Parallelogram from "@/lib/Parallelogram.js";
 
 describe("Parallelogram", function() {
   describe("for points A(0,1) B(0, 0) C(1, 0)", function() {

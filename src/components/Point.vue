@@ -1,6 +1,6 @@
 <template>
   <g>
-    <circle :cx="point.x" :cy="point.y" :r="radius" :stroke="color" fill="none"></circle>
+    <circle :class="{draggable: draggable}" :cx="point.x" :cy="point.y" :r="radius" :stroke="color" fill="transparent"></circle>
     <position-label :position="point"/>
   </g>
 </template>
@@ -14,6 +14,10 @@ export default {
     PositionLabel
   },
   props: {
+    draggable: {
+      type: Boolean,
+      default: false
+    },
     color: String,
     point: Object,
     radius: {
@@ -24,5 +28,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.draggable {
+  cursor: move;
+}
 </style>

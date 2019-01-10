@@ -1,19 +1,14 @@
 <template>
   <g>
-    <point :key="idx" :point="point" color="#FF0000" v-for="(point, idx) in firstThree"/>
     <position-label :position="parallelogram.CM"/>
     <polygon :points="polygonPoints" fill="none" stroke="blue"></polygon>
   </g>
 </template>
 
 <script>
-import Point from "./Point.vue";
-
 export default {
   name: "Parallelogram",
-  components: {
-    Point
-  },
+  components: {},
   props: {
     parallelogram: Object
   },
@@ -22,9 +17,6 @@ export default {
       return this.parallelogram.points
         .map(point => `${point.x},${point.y}`)
         .join(" ");
-    },
-    firstThree() {
-      return this.parallelogram.points.slice(0, 3);
     }
   }
 };

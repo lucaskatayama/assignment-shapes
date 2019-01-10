@@ -27,7 +27,7 @@
         <ul v-if="p">
           <li>Center of Mass: ({{p.CM.x}}, {{p.CM.y}})</li>
           <li>Area: {{p.area}}</li>
-          <li>Radius: {{radius}}</li>
+          <li>Radius: {{radius}}px</li>
         </ul>
       </div>
     </nav>
@@ -42,11 +42,9 @@
       <div class="home">
         <svg class="canvas" ref="canvas">
           <parallelogram-shape :parallelogram="p" v-if="points.length === 3"></parallelogram-shape>
-          <circle-shape :center="p.CM" :radius="radius" color="#FFD438" v-if="points.length === 3"></circle-shape>
+          <circle-shape :center="centerOfMass" :radius="radius" color="#FFD438" v-if="points.length === 3"></circle-shape>
           <point :point="mouse" color="#FF0000"></point>
-          <template v-if="points.length < 3">
-            <point :key="idx" :point="point" color="#FF0000" v-for="(point, idx) in points"></point>
-          </template>
+          <point draggable :key="idx" :point="point" color="#FF0000" v-for="(point, idx) in points"></point>
         </svg>
       </div>
     </main>
@@ -57,7 +55,7 @@
 // @ is an alias to /src
 import ParallelogramShape from "@/components/ParallelogramShape.vue";
 import CircleShape from "@/components/CircleShape.vue";
-import Parallelogram from "@/lib/parallelogram.js";
+import Parallelogram from "@/lib/Parallelogram.js";
 import Point from "@/components/Point.vue";
 
 export default {
@@ -75,8 +73,16 @@ export default {
       },
       points: [],
       p: null,
-      radius: 0
+      selectedPoint: null
     };
+  },
+  computed: {
+    radius() {
+      return Math.sqrt(this.p.area / Math.PI);
+    },
+    centerOfMass() {
+      return this.p.CM;
+    }
   },
   methods: {
     getMousePos(canvas, evt) {
@@ -99,12 +105,44 @@ export default {
           this.points[1],
           this.points[2]
         );
-        this.radius = Math.sqrt(this.p.area / Math.PI);
       }
     },
-    mouseClick(evt) {
-      let mouseClickPosition = this.getMousePos(this.canvas, evt);
-      this.addParallelogramPoint(mouseClickPosition);
+    distance(a, b) {
+      return Math.sqrt(Math.abs((a.x - b.x) ** 2 + (a.y - b.y) ** 2));
+    },
+    click(evt) {
+      let mouse = this.getMousePos(this.canvas, evt);
+      const point = this.points.find(p => {
+        return this.distance(p, mouse) <= 5.5;
+      });
+      if (!point) {
+        this.addParallelogramPoint(mouse);
+      }
+    },
+    startDrag(evt) {
+      let mouse = this.getMousePos(this.canvas, evt);
+      const point = this.points.find(p => {
+        return this.distance(p, mouse) <= 5.5;
+      });
+      if (point) {
+        this.selectedPoint = point;
+        this.canvas.addEventListener("mousemove", this.drag, false);
+      }
+    },
+    drag(evt) {
+      if (this.selectedPoint) {
+        let mouse = this.getMousePos(this.canvas, evt);
+        this.selectedPoint.x = mouse.x;
+        this.selectedPoint.y = mouse.y;
+      }
+    },
+    endDrag() {
+      if (this.selectedPoint) {
+        this.selectedPoint.x = this.mouse.x;
+        this.selectedPoint.y = this.mouse.y;
+        this.selectedPoint = null;
+        this.canvas.removeEventListener("mousemove", this.drag, false);
+      }
     },
     mouseMove(evt) {
       this.mouse = this.getMousePos(this.canvas, evt);
@@ -113,11 +151,15 @@ export default {
   mounted() {
     this.canvas = this.$refs.canvas;
     this.canvas.addEventListener("mousemove", this.mouseMove, false);
-    this.canvas.addEventListener("click", this.mouseClick, false);
+    this.canvas.addEventListener("click", this.click, false);
+    this.canvas.addEventListener("mousedown", this.startDrag, false);
+    this.canvas.addEventListener("mouseup", this.endDrag, false);
   },
   unmounted() {
     this.canvas.removeEventListener("mousemove", this.mouseMove);
-    this.canvas.removeEventListener("click", this.mouseClick);
+    this.canvas.removeEventListener("click", this.click);
+    this.canvas.removeEventListener("mousedown", this.startDrag);
+    this.canvas.removeEventListener("mouseup", this.endDrag);
   }
 };
 </script>
