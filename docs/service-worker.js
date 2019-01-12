@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.88cb9ea70dd34d682b4fe36970562f9b.js"
+  "precache-manifest.7eff4c69ceb1290cb8c4eceb84033c7f.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "asigment"});
