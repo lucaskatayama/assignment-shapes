@@ -5,7 +5,7 @@
         <logo></logo> Shapes
       </router-link>
       <ul class="navbar-nav mr-auto flex-row">
-        <router-link class="nav-item mr-4" tag="li" to="/">
+        <router-link class="nav-item mr-4" tag="li" to="/canvas">
           <a class="nav-link">Canvas</a>
         </router-link>
         <router-link class="nav-item mr-4" tag="li" to="/about">
