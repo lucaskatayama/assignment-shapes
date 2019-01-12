@@ -15,25 +15,25 @@
         <h4 id="4th-point-point-d-">4th point (point D)</h4>
         <p>The 4th was calculated by decomposing the edges BA and BC and them sum them to reach point D, like in the image below:</p>
         <p>
-          <img class="graph" alt="Calculation point D" src="img/about/calc_pointD.png">
+          <img class="graph" alt="Calculation point D" src="@/assets/img/about/calc_pointD.png">
         </p>
         <h4 id="area-of-a-parallelogram">Area of a Parallelogram</h4>
         <p>A parallelogram is made of 2 triangles with same area. One of them is determined by the 3 points A, B, C given by the user.</p>
         <p>To calculate the area of a triangle ABC, we can use the determinant of a matrix:</p>
         <p>
-          <img class="math" alt="Area triangle ABC" src="img/about/calc_areaabc.png">
+          <img class="math" alt="Area triangle ABC" src="@/assets/img/about/calc_areaabc.png">
         </p>
         <p>Or 2 times the triangle area is the parallelogram area:</p>
         <p>
-          <img class="math" alt="Area ABCD" src="img/about/calc_areaabcd.png">
+          <img class="math" alt="Area ABCD" src="@/assets/img/about/calc_areaabcd.png">
         </p>
         <p>
-          <img class="math"  alt="Area ABCD" src="img/about/calc_areaabcd1.png">
+          <img class="math"  alt="Area ABCD" src="@/assets/img/about/calc_areaabcd1.png">
         </p>
         <h4 id="center-of-mass">Center of Mass</h4>
         <p>The center of mass is calculated by summing to the point B, half of distance of the edge components BA and BC:</p>
         <p>
-          <img class="graph" alt="Calculation Center of Mass" src="img/about/calc_centermass.png">
+          <img class="graph" alt="Calculation Center of Mass" src="@/assets/img/about/calc_centermass.png">
         </p>
         <h3 id="circle">Circle</h3>
         <h4 id="center">Center</h4>
@@ -41,7 +41,7 @@
         <h4 id="radius">Radius</h4>
         <p>The radius could be found using its area:</p>
         <p>
-          <img class="math" alt="Calculation radius" src="img/about/calc_radius.png">
+          <img class="math" alt="Calculation radius" src="@/assets/img/about/calc_radius.png">
         </p>
       </div>
   </div>

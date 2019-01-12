@@ -1,6 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Canvas from "./views/Canvas.vue";
+import About from "./views/About.vue";
+import AboutApplication from "./views/about/Application.vue";
+import AboutTech from "./views/about/Technologies.vue";
+import AboutAuthor from "./views/about/Author.vue";
 
 Vue.use(Router);
 
@@ -15,8 +19,7 @@ export default new Router({
     {
       path: "/about",
       name: "about",
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue"),
+      component: About,
       children: [
         {
           path: "",
@@ -25,20 +28,17 @@ export default new Router({
         {
           path: "app",
           name: "about/app",
-          component: () =>
-            import(/* webpackChunkName: "application" */ "./views/about/Application.vue")
+          component: AboutApplication
         },
         {
           path: "tech",
           name: "about/tech",
-          component: () =>
-            import(/* webpackChunkName: "application" */ "./views/about/Technologies.vue")
+          component: AboutTech
         },
         {
           path: "author",
           name: "about/author",
-          component: () =>
-            import(/* webpackChunkName: "author" */ "./views/about/Author.vue")
+          component: AboutAuthor
         },
         {
           path: "*",

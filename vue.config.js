@@ -1,3 +1,11 @@
 module.exports = {
-  baseUrl: './'
+  baseUrl: './',
+  outputDir: 'docs',
+  assetsDir: undefined,
+  runtimeCompiler: true,
+  productionSourceMap: undefined,
+  parallel: undefined,
+  css: {
+    sourceMap: true
+  }
 }
