@@ -5,6 +5,7 @@ import About from "./views/About.vue";
 import AboutApplication from "./views/about/Application.vue";
 import AboutTech from "./views/about/Technologies.vue";
 import AboutAuthor from "./views/about/Author.vue";
+import AboutGeometry from "./views/about/Geometry.vue";
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
           path: "tech",
           name: "about/tech",
           component: AboutTech
+        },
+        {
+          path: "math",
+          name: "about/geometry",
+          component: AboutGeometry
         },
         {
           path: "author",

@@ -9,6 +9,9 @@
           <router-link class="nav-item" tag="li" to="/about/app">
             <a class="nav-link">Application</a>
           </router-link>
+          <router-link class="nav-item" tag="li" to="/about/math">
+            <a class="nav-link">Geometry</a>
+          </router-link>
           <router-link class="nav-item" tag="li" to="/about/tech">
             <a class="nav-link active">Technologies</a>
           </router-link>

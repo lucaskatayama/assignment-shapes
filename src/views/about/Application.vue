@@ -4,45 +4,34 @@
         <h1 class="h2">Application</h1>
       </div>
       <div class="content">
-        <h2 id="goal">Goal</h2>
-        <p>The goal of this application is to interact with the user and draws some geometrical shapes:</p>
-        <ul>
-          <li>a blue parallelogram, having three of its corners in the points selected by the user.</li>
-          <li>a yellow circle, with the same area and centre of mass as the parallelogram.</li>
-        </ul>
-        <h2 id="calculations">Calculations</h2>
-        <h3 id="parallelogram">Parallelogram</h3>
-        <h4 id="4th-point-point-d-">4th point (point D)</h4>
-        <p>The 4th was calculated by decomposing the edges BA and BC and them sum them to reach point D, like in the image below:</p>
-        <p>
-          <img class="graph" alt="Calculation point D" src="@/assets/img/about/calc_pointD.png">
-        </p>
-        <h4 id="area-of-a-parallelogram">Area of a Parallelogram</h4>
-        <p>A parallelogram is made of 2 triangles with same area. One of them is determined by the 3 points A, B, C given by the user.</p>
-        <p>To calculate the area of a triangle ABC, we can use the determinant of a matrix:</p>
-        <p>
-          <img class="math" alt="Area triangle ABC" src="@/assets/img/about/calc_areaabc.png">
-        </p>
-        <p>Or 2 times the triangle area is the parallelogram area:</p>
-        <p>
-          <img class="math" alt="Area ABCD" src="@/assets/img/about/calc_areaabcd.png">
-        </p>
-        <p>
-          <img class="math"  alt="Area ABCD" src="@/assets/img/about/calc_areaabcd1.png">
-        </p>
-        <h4 id="center-of-mass">Center of Mass</h4>
-        <p>The center of mass is calculated by summing to the point B, half of distance of the edge components BA and BC:</p>
-        <p>
-          <img class="graph" alt="Calculation Center of Mass" src="@/assets/img/about/calc_centermass.png">
-        </p>
-        <h3 id="circle">Circle</h3>
-        <h4 id="center">Center</h4>
-        <p>Center of the circle is the same as the center of mass of the parallelogram.</p>
-        <h4 id="radius">Radius</h4>
-        <p>The radius could be found using its area:</p>
-        <p>
-          <img class="math" alt="Calculation radius" src="@/assets/img/about/calc_radius.png">
-        </p>
+        <section>
+          <h2 id="goal">Goal</h2>
+          <p>The goal of this application is to interact with the user and draws some geometrical shapes:</p>
+          <ul>
+            <li>a blue parallelogram, having three of its corners in the points selected by the user.</li>
+            <li>a yellow circle, with the same area and centre of mass as the parallelogram.</li>
+          </ul>
+        </section>
+        <section>
+          <h2 id="calculations">How to use</h2>
+          <p>Access the [Canvas] using the navigation bar on the top left</p>
+          <p>Them click 3 times on the canvas located on the main section, on the right side.</p>
+          <p>After the 3rd point, you will see all the information about the shape on the left side.</p>
+          <p>If you want to move one of the 3 points, just move the cursor on top of one point, and drag it to the new position.</p>
+          <p>All the information should be updated.</p>
+          <p> To reset the canvas, click on the button [Reset], located on the right side.</p>
+        </section>
+        <section>
+          <h2>How the information was calculated?</h2>
+          <p>You can find out how I calculated all the information, by access the [Geometry] section on the right side.</p>
+        </section>
+        <section>
+          <h2>Source code</h2>
+          <p>
+            All the source code can be cloned on the github repository:
+            <a target="_blank" href="https://github.com/lucaskatayama/assignment-shapes"> https://github.com/lucaskatayama/assignment-shapes</a>
+          </p>
+        </section>
       </div>
   </div>
 </template>
