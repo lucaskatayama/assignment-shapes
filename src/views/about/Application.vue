@@ -31,6 +31,12 @@
             All the source code can be cloned on the github repository:
             <a target="_blank" href="https://github.com/lucaskatayama/assignment-shapes"> https://github.com/lucaskatayama/assignment-shapes</a>
           </p>
+          <p>
+            An online version can be found here:
+            <a target="_blank" href="http://github.lucaskatayama.com/assignment-shapes/">
+            http://github.lucaskatayama.com/assignment-shapes/
+            </a>
+          </p>
         </section>
       </div>
   </div>
