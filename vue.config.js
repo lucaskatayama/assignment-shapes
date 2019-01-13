@@ -1,6 +1,6 @@
 module.exports = {
-  baseUrl: './',
-  outputDir: 'docs',
+  publicPath: "./",
+  outputDir: "docs",
   assetsDir: undefined,
   runtimeCompiler: true,
   productionSourceMap: undefined,
@@ -8,4 +8,4 @@ module.exports = {
   css: {
     sourceMap: true
   }
-}
+};
