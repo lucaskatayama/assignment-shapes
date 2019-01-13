@@ -31,7 +31,7 @@
           No circle
         </p>
         <ul v-else>
-          <li>Center of Mass: ({{circle.center.x}}, {{circle.center.x}})</li>
+          <li>Center: ({{circle.center.x}}, {{circle.center.x}})</li>
           <li>Area: {{circle.area}} px<sup>2</sup></li>
           <li>Radius: {{circle.getRadius()}} px</li>
         </ul>

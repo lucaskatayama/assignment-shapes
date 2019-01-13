@@ -20,10 +20,6 @@
         <p>
           The calculators was built with VanillaJS and tested using Mocha and Chai.
         </p>
-        <h2>Source Code</h2>
-        <p>
-          Source code can be found here: <a href="http://"></a>
-        </p>
         <h2>References</h2>
         <ul>
           <li>
