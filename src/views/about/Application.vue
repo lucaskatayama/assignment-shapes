@@ -23,6 +23,7 @@
               <li>The parallelogram's 4th point.</li>
               <li>The area in pixels<sup>2</sup> and its center of mass in the format (x, y) in pixels.</li>
               <li>You can also find the circle's information. Its area (pixels<sup>2</sup>) and its radius (pixels).</li>
+            </ul>
           </p>
           <p>If you want to move one of the 3 points, just move the cursor on top of one point, and drag it to the new position.</p>
           <p>All the information should be updated.</p>

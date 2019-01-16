@@ -7,7 +7,7 @@
         <h2 id="calculations">Calculations</h2>
         <h3 id="parallelogram">Parallelogram</h3>
         <h4 id="4th-point-point-d-">4th point (point D)</h4>
-        <p>The 4th was calculated by decomposing the edges BA and BC and them sum them to reach point D, like in the image below:</p>
+        <p>The 4th was calculated by decomposing the edges BA and BC and then sum them to reach point D, like in the image below:</p>
         <p>
           <img class="graph" alt="Calculation point D" src="@/assets/img/about/calc_pointD.png">
         </p>
